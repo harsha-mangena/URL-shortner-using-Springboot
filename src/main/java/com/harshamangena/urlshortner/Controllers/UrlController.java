@@ -10,8 +10,11 @@ import com.harshamangena.urlshortner.Exceptions.UrlAlreadyExistsException;
 import com.harshamangena.urlshortner.Models.UrlDto;
 import com.harshamangena.urlshortner.Services.UrlServiceImpl;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/v1")
+@Slf4j
 public class UrlController {
 
     @Autowired
@@ -24,6 +27,7 @@ public class UrlController {
      */
     @GetMapping("/register")
     public UrlDto registerLongUrl(@RequestParam String longUrl){
+        log.info("Inside UrlControllers : End point -> /register");
         return urlService.registerURL(longUrl);
     }
 
@@ -34,6 +38,7 @@ public class UrlController {
      */
     @GetMapping("/register-custom")
     public UrlDto registerCustomUrl(@RequestParam String longUrl, @RequestParam String customUrl){
+        log.info("Inside UrlControllers : End point -> /register-custom");
         UrlDto response = urlService.registerUrl(longUrl, customUrl);
 
         if(response == null){

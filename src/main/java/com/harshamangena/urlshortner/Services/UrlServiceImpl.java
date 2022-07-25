@@ -43,7 +43,7 @@ public class UrlServiceImpl implements IUrlService {
      */
 
     protected boolean isValidShortUrl(String url){
-        log.info("Hitted DB checkpoint for shortURL");
+        log.info("Inside UrlServices : Hitted DB checkpoint for shortURL");
         UrlDto  dtoResponse = urlRepository.findByshortUrl(url);
         return dtoResponse == null;
 
@@ -55,7 +55,7 @@ public class UrlServiceImpl implements IUrlService {
      * @return Object UrlDto
      */
     protected UrlDto isValidLongUrl(String url){
-        log.info("Hitted DB checkpoint for longURL");
+        log.info("Inside UrlServices : Hitted DB checkpoint for longURL");
         UrlDto dtoResponse = urlRepository.findBylongUrl(url);
         return dtoResponse;
     }
@@ -65,6 +65,9 @@ public class UrlServiceImpl implements IUrlService {
      */
     @Override
     public UrlDto registerURL(String longUrl) {
+
+        log.info("In UrlServices -> Public Method : Register Url");
+
         String shortUrl = shortUrlHelper();
 
         //Checking if the given longurl is not in the system.
@@ -89,6 +92,8 @@ public class UrlServiceImpl implements IUrlService {
     @Override
     public UrlDto registerUrl(String longUrl, String customUrl) {
 
+        log.info("In UrlServices -> Public Method : Register Custom Url");
+
         //Checking if the longUrl already in DB
         url = isValidLongUrl(longUrl);
 
@@ -112,9 +117,8 @@ public class UrlServiceImpl implements IUrlService {
                          .createdAt(LocalDate.now().toString())
                          .build();
 
+        log.info("In UrlService -> Private method : saveURL ");
         return urlRepository.save(request);
     }
-    
-
 
 }
